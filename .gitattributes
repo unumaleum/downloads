@@ -3,4 +3,5 @@
 *.png binary
 *.msi binary
 *.exe binary
-*.mib text
+# MIB files are published byte for byte as their author wrote them (CRLF).
+*.mib -text

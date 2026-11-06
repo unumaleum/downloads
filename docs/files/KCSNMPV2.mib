@@ -1,0 +1,1079 @@
+    EXELTECH-MIB DEFINITIONS ::= BEGIN
+IMPORTS
+        TRAP-TYPE
+                FROM RFC-1215
+
+        OBJECT-TYPE
+                FROM RFC-1212
+	    DisplayString	FROM SNMPv2-TC
+				
+        enterprises, IpAddress
+                FROM RFC1155-SMI;
+				
+-- validated with https://www.muonics.com/Tools/smicheck.php  
+  
+-- Author Raymond Sgroi  7/29/2024
+
+        exeltechKCMIB    OBJECT IDENTIFIER ::= { enterprises 30320 }
+
+-- these are the objects
+
+        kcSysMon      OBJECT IDENTIFIER ::= { exeltechKCMIB 2 }
+
+        objects         OBJECT IDENTIFIER ::= { kcSysMon 0 }
+ 
+        battery         OBJECT IDENTIFIER ::= { objects 1 }
+		
+		phase1          OBJECT IDENTIFIER ::= { objects 2 }
+
+		phase2          OBJECT IDENTIFIER ::= { objects 3 }
+
+		phase3          OBJECT IDENTIFIER ::= { objects 4 }
+
+	    alarms          OBJECT IDENTIFIER ::= { objects 5 }
+
+		settings        OBJECT IDENTIFIER ::= { objects 6 }
+		
+		system          OBJECT IDENTIFIER ::= { objects 7 }
+
+
+-- object defines
+--
+--   battery objects
+-- 
+        batDCV OBJECT-TYPE
+                SYNTAX INTEGER
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "The battery voltage. Displayed in deciVolts. Divide by 10 to get DC voltage."
+                ::= { battery 1 }
+
+        batDCI OBJECT-TYPE
+                SYNTAX INTEGER (0..65535)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "The battery current. Displayed in amps."
+                ::= { battery 2 }
+
+        batABUS OBJECT-TYPE
+                SYNTAX INTEGER (0..65535)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "The A bus DC voltage if present. Displayed in DC Volts."
+                ::= { battery 3 }
+
+        batBBUS OBJECT-TYPE
+                SYNTAX INTEGER (0..65535)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "The B bus DC voltage if present. Displayed in DC Volts."
+                ::= { battery 4 }
+--
+--   phase 1 objects
+-- 
+         utilityAcvL1 OBJECT-TYPE
+                SYNTAX INTEGER (0..65535)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "The Inverter AC voltage of phase 1. Displayed in AC Volts."
+                ::= { phase1 1 }
+
+        utilityAciL1 OBJECT-TYPE
+                SYNTAX INTEGER (0..65535)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "The Inverter current of phase 1. Displayed in amps."
+                ::= { phase1 2 }
+
+        utilityFrqL1 OBJECT-TYPE
+                SYNTAX INTEGER (0..65535)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "The Inverter frequency of phase 1. Displayed in hertz."
+                ::= { phase1 3 }
+
+        inverterAcvL1 OBJECT-TYPE
+                SYNTAX INTEGER (0..65535)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "The Utility AC voltage of phase 1. Displayed in AC Volts."
+                ::= { phase1 4 }
+
+        inverterAciL1 OBJECT-TYPE
+                SYNTAX INTEGER (0..65535)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "The Utility current of phase 1. Displayed in amps."
+                ::= { phase1 5 }
+
+        inverterFrqL1 OBJECT-TYPE
+                SYNTAX INTEGER (0..65535)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "The Utility frequency of phase 1. Displayed in hertz."
+                ::= { phase1 6 }
+
+        line1AcvOut OBJECT-TYPE
+                SYNTAX INTEGER (0..65535)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "The Output Voltage of phase 1. Displayed in AC volts"
+                ::= { phase1 7 }
+
+        temperatureSTSL1 OBJECT-TYPE
+                SYNTAX INTEGER (0..65535)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "The the SCR temperature of phase 1. Displayed in Degrees C."
+                ::= { phase1 8 }
+--
+--   phase 2 objects
+-- 
+        utilityAcvL2  OBJECT-TYPE
+                SYNTAX INTEGER (0..65535)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "The Inverter AC voltage of phase 2. Displayed in AC Volts."
+                ::= { phase2 1 }
+
+         utilityAciL2 OBJECT-TYPE
+                SYNTAX INTEGER (0..65535)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "The Inverter current of phase 2. Displayed in amps."
+                ::= { phase2 2 }
+
+         utilityFrqL2 OBJECT-TYPE
+                SYNTAX INTEGER (0..65535)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "The Inverter frequency of phase 2. Displayed in hertz."
+                ::= { phase2 3 }
+
+        inverterAcvL2 OBJECT-TYPE
+                SYNTAX INTEGER (0..65535)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "The Utility AC voltage of phase 2. Displayed in AC Volts."
+                ::= { phase2 4 }
+
+        inverterAciL2 OBJECT-TYPE
+                SYNTAX INTEGER (0..65535)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "The Utility current of phase 2. Displayed in amps."
+                ::= { phase2 5 }
+
+        inverterFrqL2 OBJECT-TYPE
+                SYNTAX INTEGER (0..65535)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "The Utility frequency of phase 2. Displayed in hertz."
+                ::= { phase2 6 }
+
+        line2ACVOut OBJECT-TYPE
+                SYNTAX INTEGER (0..65535)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "The Output Voltage of phase 2. Displayed in AC volts"
+                ::= { phase2 7 }
+
+        temperatureSTSL2 OBJECT-TYPE
+                SYNTAX INTEGER (0..65535)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "The the SCR temperature of phase 2. Displayed in Degrees C."
+                ::= { phase2 8 }
+
+--
+--   phase 3 objects
+--       
+
+         utilityAcvL3 OBJECT-TYPE
+                SYNTAX INTEGER (0..65535)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "The Inverter AC voltage of phase 3. Displayed in AC Volts."
+                ::= { phase3 1 }
+
+         utilityAciL3 OBJECT-TYPE
+                SYNTAX INTEGER (0..65535)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "The Inverter current of phase 3. Displayed in amps."
+                ::= { phase3 2 }
+
+         utilityFrqL3 OBJECT-TYPE
+                SYNTAX INTEGER (0..65535)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "The Inverter frequency of phase 3. Displayed in hertz."
+                ::= { phase3 3 }
+
+        inverterAcvL3 OBJECT-TYPE
+                SYNTAX INTEGER (0..65535)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "The Utility AC voltage of phase 3. Displayed in AC Volts."
+                ::= { phase3 4 }
+
+        inverterAciL3 OBJECT-TYPE
+                SYNTAX INTEGER (0..65535)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "The Utility current of phase 3. Displayed in amps."
+                ::= { phase3 5 }
+
+        inverterFrqL3 OBJECT-TYPE
+                SYNTAX INTEGER (0..65535)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "The Utility frequency of phase 3. Displayed in hertz."
+                ::= { phase3 6 }
+
+        line3ACVOut OBJECT-TYPE
+                SYNTAX INTEGER (0..65535)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "The Output Voltage of phase 3. Displayed in AC volts"
+                ::= { phase3 7 }
+
+        temperatureSTSL3 OBJECT-TYPE
+                SYNTAX INTEGER (0..65535)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "The the SCR temperature of phase 3. Displayed in Degrees C."
+                ::= { phase3 8 }
+--
+--   alarms objects
+--
+        systemAlarms OBJECT-TYPE
+                SYNTAX INTEGER
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "Alarms Status: This is a 4 byte and each bit represents an alarm. 
+					
+					0x00000001 - Low DC Volt Alarm
+					0x00000002 - Power Module Fail
+					0x00000004 - NA
+					0x00000008 - PowerLvlIndicator       
+					0x00000010 - Module Temperature Warning
+					0x00000020 - Module Local Disable
+					0x00000040 - cage comm failure detected
+					0x00000080 - AB Bus Fail Detect
+					0x00000100 - System Disable 
+				    0x00000200 - Power Module fail detected
+					0x00000400 - Slot Not Detected fault
+					0x00000800 - Ph1 on Ref2
+					0x00001000 - Ph1 on Ref2
+					0x00002000 - Ph1 on Ref2
+					0x00004000 - NA
+					0x00008000 - NA
+					0x00010000 - Utility Primary
+					0x00020000 - Inverter source fault 
+					0x00040000 - Utility source fault
+					0x00080000 - MBS Lockout Asserted
+					0x00100000 - Sources not sync
+					0x00200000 - Fan fault detect STS PowerSwitch
+                    0x00400000 - Warm Temp  STS PowerSwitch
+                    0x00800000 - Overtemp 	STS PowerSwitch					
+					0x01000000 - SCR Active  (Legacy)
+					0x02000000 - Utility SCR Driving  
+					0x04000000 - STS Backfeed protection enabled
+					0x08000000 - Line 2 Line fail
+					0x10000000 - STS Forced Inverter State
+					0x20000000 - STS Forced Utility State
+					0x40000000 - STS Forced Contactor Open
+					0x80000000 - STS Contactor Open Detected"
+					
+                ::= { alarms 1 }
+				
+		slotAlarms OBJECT-TYPE
+                SYNTAX INTEGER
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "Alarms Status: This is a 4 byte and each bit represents a slot not communicating. 
+					
+					0x00000001 - Slot  1 not detected
+					0x00000002 - Slot  2 not detected
+					0x00000004 - Slot  3 not detected
+					0x00000008 - Slot  4 not detected  
+					0x00000010 - Slot  5 not detected
+					0x00000020 - Slot  6 not detected
+					0x00000040 - Slot  7 not detected
+					0x00000080 - Slot  8 not detected
+					0x00000100 - Slot  9 not detected
+				    0x00000200 - Slot 10 not detected
+					0x00000400 - Slot 11 not detected
+					0x00000800 - n/a 
+					0x00001000 - n/a 
+					0x00002000 - n/a 
+					0x00004000 - n/a 
+					0x00008000 - n/a" 
+				
+                ::= { alarms 2 }
+				
+        alarmOne OBJECT-TYPE
+                SYNTAX INTEGER
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "Alarms Status: 0 is no Alarm, 1 is any configured Alarm 1 bit set with the corrisponding alarm 1 bit set."
+                ::= { alarms 3 }
+
+        alarmTwo OBJECT-TYPE
+                SYNTAX INTEGER
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "Alarms Status: 0 is no Alarm, 1 is any configured Alarm 2 bit set with the corrisponding alarm 2 bit set."
+                ::= { alarms 4 }     
+--
+--   settings objects
+--
+        dCVLow OBJECT-TYPE
+                SYNTAX INTEGER
+                ACCESS read-write
+                STATUS mandatory
+                DESCRIPTION
+                        "This value is the low DC Voltage limit for sending traps. The voltage 
+					 needs to be set in deciVolts. Multiply the voltage by 10 and then send
+					 that value."
+                ::= { settings 1 }
+
+        dCVHigh OBJECT-TYPE
+                SYNTAX INTEGER
+                ACCESS read-write
+                STATUS mandatory
+                DESCRIPTION
+                        "This value is the high DC Voltage limit for sending traps. The voltage 
+					 needs to be set in deciVolts. Multiply the voltage by 10 and then send
+					 that value."
+                ::= { settings 2 }
+				
+        alarm1Configuration OBJECT-TYPE
+                SYNTAX INTEGER
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "The Current internal bitstate configurations for Alarm 1 
+					 Use ProductStatus to modify Configurations"
+                ::= { settings 3 }
+				
+        alarm2Configuration OBJECT-TYPE
+                SYNTAX INTEGER
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "The Current internal bitstate configurations for Alarm 2 
+					 Use ProductStatus to modify Configurations"
+                ::= { settings 4 }
+				
+        slotConfiguration OBJECT-TYPE
+                SYNTAX INTEGER
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "The Current internal bitstate configurations for module slot alarms"
+                ::= { settings 5 }
+
+        trap-target-ip1 OBJECT-TYPE
+                SYNTAX IpAddress
+                ACCESS read-write
+                STATUS mandatory
+                DESCRIPTION
+                        "Ip address of the first manager for traps. Set to zero to STOP TRAPS from sending"
+                ::= { settings 6 }
+
+        trap-target-ip2 OBJECT-TYPE
+                SYNTAX IpAddress
+                ACCESS read-write
+                STATUS mandatory
+                DESCRIPTION
+                        "Ip address of the second manager for traps.  Set to zero to remove target"
+                ::= { settings 7 }
+				
+        trap-target-ip3 OBJECT-TYPE
+                SYNTAX IpAddress
+                ACCESS read-write
+                STATUS mandatory
+                DESCRIPTION
+                        "Ip address of the third manager for traps.  Set to zero to remove target"
+                ::= { settings 8 }
+				
+        ipAddressStatic OBJECT-TYPE
+                SYNTAX IpAddress
+                ACCESS read-write
+                STATUS mandatory
+                DESCRIPTION
+                        "The System static IP Address"
+                ::= { settings 9 }
+
+        subnetMaskStatic OBJECT-TYPE
+                SYNTAX IpAddress
+                ACCESS read-write
+                STATUS mandatory
+                DESCRIPTION
+                        "The System IP subnet mask"
+                ::= { settings 10 }
+
+        defaultGatewayStatic OBJECT-TYPE
+                SYNTAX IpAddress
+                ACCESS read-write
+                STATUS mandatory
+                DESCRIPTION
+                        "The System IP Gateway Address"
+                ::= { settings 11 }
+        setNetworkConfig OBJECT-TYPE
+                SYNTAX INTEGER
+                ACCESS read-write
+                STATUS mandatory
+                DESCRIPTION
+                        "Integer value indicationg Static IP usage or DHCP usage, also any additional networking properties"
+                ::= { settings 12 }
+----------------------------------------------------------------------------------------------------------
+        ntp-ip1 OBJECT-TYPE
+                SYNTAX IpAddress
+                ACCESS read-write
+                STATUS mandatory
+                DESCRIPTION
+                        "Ip address of the SNTP server"
+                ::= { settings 13 }
+        ntp-set OBJECT-TYPE
+                SYNTAX INTEGER
+                ACCESS read-write
+                STATUS mandatory
+                DESCRIPTION
+                        "Timezone settings For SNTP configuration"
+                ::= { settings 14 }
+        traps-config OBJECT-TYPE
+                SYNTAX INTEGER
+                ACCESS read-write
+                STATUS mandatory
+                DESCRIPTION
+                        "configuration setting for the All-good traps, 0-255 where the period between All-good traps is 30 seconds*VALUE, zero is off"
+                ::= { settings 15 }
+        logging-config OBJECT-TYPE
+                SYNTAX INTEGER
+                ACCESS read-write
+                STATUS mandatory
+                DESCRIPTION
+                        "configuration setting logging, factory use only"
+                ::= { settings 16 }				
+----------------------------------------------------------------------------------------------------
+--
+-- V1/V2 trap syntax
+--	
+
+	lowDCtrap  TRAP-TYPE
+				ENTERPRISE batDCV 
+				VARIABLES { batDCV, dCVLow }
+				DESCRIPTION "Battery voltage low limit has been triggered."
+	::=  1
+
+	highDCtrap		TRAP-TYPE
+				ENTERPRISE batDCV 
+				VARIABLES { batDCV, dCVHigh }
+				DESCRIPTION "Battery voltage high limit has been triggered."
+	::=  2 
+
+	 
+
+	alarmConfig1trap		TRAP-TYPE
+				ENTERPRISE alarms   				
+				VARIABLES { alarm1Configuration, systemAlarms}
+				DESCRIPTION "A minor alarm has been triggered."
+	::=  3 
+
+	alarmConfig2trap		TRAP-TYPE
+				ENTERPRISE alarms 			
+				VARIABLES  { alarm2Configuration, systemAlarms}
+				DESCRIPTION "A major alarm has been triggered."
+	::=  4 
+	
+	generalAlarmtrap		TRAP-TYPE
+				ENTERPRISE alarms 			
+				VARIABLES { alarmOne, alarmTwo }
+				DESCRIPTION "A general Status update"
+	::=  5
+	slotAlarmtrap		TRAP-TYPE
+				ENTERPRISE alarms 			
+				VARIABLES { slotAlarms }
+				DESCRIPTION "A general Status update"
+	::=  6
+
+--alarmOne
+------------------------------------------------------------------------------------------------
+
+
+--   system objects
+-- 
+        systemName OBJECT-TYPE
+                SYNTAX  DisplayString (SIZE (0..255))
+                ACCESS read-write
+                STATUS mandatory
+                DESCRIPTION
+                        "System barcode pn"
+                ::= { system 1 }
+
+        systemSerial  OBJECT-TYPE
+                SYNTAX INTEGER
+                ACCESS read-write
+                STATUS mandatory
+                DESCRIPTION
+                        "System serial number"
+                ::= { system 2 }
+-------------------------------------------------------end of SNMP entered System Part number
+        monitorName OBJECT-TYPE
+                SYNTAX  DisplayString (SIZE (0..255))
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "Monitor card barcode pn"
+                ::= { system 3 }
+
+        monitorSer  OBJECT-TYPE
+                SYNTAX INTEGER
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "Monitor card serial number"
+                ::= { system 4 }
+
+-------------------------------------------------------end of Monitor/Controller  card
+
+        slot1Name OBJECT-TYPE
+                SYNTAX  DisplayString (SIZE (0..255))
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "module Barcode pn"
+                ::= { system 5 }
+        slot1Ser  OBJECT-TYPE
+                SYNTAX INTEGER (0..16777215)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "module serial number"
+                ::= { system 6 }
+        slot1Fan  OBJECT-TYPE
+                SYNTAX INTEGER (0..16777215)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "module fanspeed"
+                ::= { system 7 }
+        slot1Temp  OBJECT-TYPE
+                SYNTAX INTEGER (0..16777215)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "module Temperature"
+                ::= { system 8 }
+        slot1St  OBJECT-TYPE
+                SYNTAX INTEGER (0..16777215)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "module Status bits"
+                ::= { system 9 }
+        slot1Out OBJECT-TYPE
+                SYNTAX INTEGER (0..16777215)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "module output level"
+                ::= { system 10 }
+
+-------------------------------------------------------end of individual module 1				
+				
+       slot2Name OBJECT-TYPE
+                SYNTAX  DisplayString (SIZE (0..255))
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "module Barcode pn"
+                ::= { system 11 }
+        slot2Ser  OBJECT-TYPE
+                SYNTAX INTEGER (0..16777215)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "module serial number"
+                ::= { system 12 }
+        slot2Fan  OBJECT-TYPE
+                SYNTAX INTEGER (0..16777215)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "module fanspeed"
+                ::= { system 13 }
+        slot2Temp  OBJECT-TYPE
+                SYNTAX INTEGER (0..16777215)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "module Temperature"
+                ::= { system 14 }
+        slot2St  OBJECT-TYPE
+                SYNTAX INTEGER (0..16777215)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "module Status bits"
+                ::= { system 15 }
+        slot2Out OBJECT-TYPE
+                SYNTAX INTEGER (0..16777215)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "module output level"
+                ::= { system 16 }
+				
+-------------------------------------------------------end of individual module 2
+
+				
+       slot3Name OBJECT-TYPE
+                SYNTAX  DisplayString (SIZE (0..255))
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "module Barcode pn"
+                ::= { system 17 }
+        slot3Ser  OBJECT-TYPE
+                SYNTAX INTEGER (0..16777215)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "module serial number"
+                ::= { system 18 }
+        slot3Fan  OBJECT-TYPE
+                SYNTAX INTEGER (0..16777215)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "module fanspeed"
+                ::= { system 19 }
+        slot3Temp  OBJECT-TYPE
+                SYNTAX INTEGER (0..16777215)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "module Temperature"
+                ::= { system 20 }
+        slot3St  OBJECT-TYPE
+                SYNTAX INTEGER (0..16777215)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "module Status bits"
+                ::= { system 21 }
+        slot3Out OBJECT-TYPE
+                SYNTAX INTEGER (0..16777215)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "module output level"
+                ::= { system 22 }
+				
+-------------------------------------------------------end of individual module 3
+
+				
+       slot4Name OBJECT-TYPE
+                SYNTAX  DisplayString (SIZE (0..255))
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "module Barcode pn"
+                ::= { system 23 }
+        slot4Ser  OBJECT-TYPE
+                SYNTAX INTEGER (0..16777215)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "module serial number"
+                ::= { system 24 }
+        slot4Fan  OBJECT-TYPE
+                SYNTAX INTEGER (0..16777215)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "module fanspeed"
+                ::= { system 25 }
+        slot4Temp  OBJECT-TYPE
+                SYNTAX INTEGER (0..16777215)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "module Temperature"
+                ::= { system 26 }
+        slot4St  OBJECT-TYPE
+                SYNTAX INTEGER (0..16777215)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "module Status bits"
+                ::= { system 27 }
+        slot4Out OBJECT-TYPE
+                SYNTAX INTEGER (0..16777215)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "module output level"
+                ::= { system 28 }
+				
+-------------------------------------------------------end of individual module 4
+
+				
+       slot5Name OBJECT-TYPE
+                SYNTAX  DisplayString (SIZE (0..255))
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "module Barcode pn"
+                ::= { system 29 }
+        slot5Ser  OBJECT-TYPE
+                SYNTAX INTEGER (0..16777215)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "module serial number"
+                ::= { system 30 }
+        slot5Fan  OBJECT-TYPE
+                SYNTAX INTEGER (0..16777215)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "module fanspeed"
+                ::= { system 31 }
+        slot5Temp  OBJECT-TYPE
+                SYNTAX INTEGER (0..16777215)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "module Temperature"
+                ::= { system 32 }
+        slot5St  OBJECT-TYPE
+                SYNTAX INTEGER (0..16777215)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "module Status bits"
+                ::= { system 33 }
+        slot5Out OBJECT-TYPE
+                SYNTAX INTEGER (0..16777215)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "module output level"
+                ::= { system 34 }
+				
+-------------------------------------------------------end of individual module 5
+
+				
+       slot6Name OBJECT-TYPE
+                SYNTAX  DisplayString (SIZE (0..255))
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "module Barcode pn"
+                ::= { system 35 }
+        slot6Ser  OBJECT-TYPE
+                SYNTAX INTEGER (0..16777215)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "module serial number"
+                ::= { system 36 }
+        slot6Fan  OBJECT-TYPE
+                SYNTAX INTEGER (0..16777215)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "module fanspeed"
+                ::= { system 37 }
+        slot6Temp  OBJECT-TYPE
+                SYNTAX INTEGER (0..16777215)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "module Temperature"
+                ::= { system 38 }
+        slot6St  OBJECT-TYPE
+                SYNTAX INTEGER (0..16777215)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "module Status bits"
+                ::= { system 39 }
+        slot6Out OBJECT-TYPE
+                SYNTAX INTEGER (0..16777215)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "module output level"
+                ::= { system 40 }
+				
+-------------------------------------------------------end of individual module 6
+
+				
+       slot7Name OBJECT-TYPE
+                SYNTAX  DisplayString (SIZE (0..255))
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "module Barcode pn"
+                ::= { system 41 }
+        slot7Ser  OBJECT-TYPE
+                SYNTAX INTEGER (0..16777215)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "module serial number"
+                ::= { system 42 }
+        slot7Fan  OBJECT-TYPE
+                SYNTAX INTEGER (0..16777215)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "module fanspeed"
+                ::= { system 43 }
+        slot7Temp  OBJECT-TYPE
+                SYNTAX INTEGER (0..16777215)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "module Temperature"
+                ::= { system 44 }
+        slot7St  OBJECT-TYPE
+                SYNTAX INTEGER (0..16777215)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "module Status bits"
+                ::= { system 45 }
+        slot7Out OBJECT-TYPE
+                SYNTAX INTEGER (0..16777215)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "module output level"
+                ::= { system 46 }
+				
+-------------------------------------------------------end of individual module 7
+
+				
+       slot8Name OBJECT-TYPE
+                SYNTAX  DisplayString (SIZE (0..255))
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "module Barcode pn"
+                ::= { system 47 }
+        slot8Ser  OBJECT-TYPE
+                SYNTAX INTEGER (0..16777215)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "module serial number"
+                ::= { system 48 }
+        slot8Fan  OBJECT-TYPE
+                SYNTAX INTEGER (0..16777215)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "module fanspeed"
+                ::= { system 49 }
+        slot8Temp  OBJECT-TYPE
+                SYNTAX INTEGER (0..16777215)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "module Temperature"
+                ::= { system 50 }
+        slot8St  OBJECT-TYPE
+                SYNTAX INTEGER (0..16777215)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "module Status bits"
+                ::= { system 51 }
+        slot8Out OBJECT-TYPE
+                SYNTAX INTEGER (0..16777215)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "module output level"
+                ::= { system 52 }
+				
+-------------------------------------------------------end of individual module 8
+
+				
+       slot9Name OBJECT-TYPE
+                SYNTAX  DisplayString (SIZE (0..255))
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "module Barcode pn"
+                ::= { system 53 }
+        slot9Ser  OBJECT-TYPE
+                SYNTAX INTEGER (0..16777215)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "module serial number"
+                ::= { system 54 }
+        slot9Fan  OBJECT-TYPE
+                SYNTAX INTEGER (0..16777215)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "module fanspeed"
+                ::= { system 55 }
+        slot9Temp  OBJECT-TYPE
+                SYNTAX INTEGER (0..16777215)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "module Temperature"
+                ::= { system 56 }
+        slot9St  OBJECT-TYPE
+                SYNTAX INTEGER (0..16777215)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "module Status bits"
+                ::= { system 57 }
+        slot9Out OBJECT-TYPE
+                SYNTAX INTEGER (0..16777215)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "module output level"
+                ::= { system 58 }
+				
+-------------------------------------------------------end of individual module 9
+
+				
+       slot10Name OBJECT-TYPE
+                SYNTAX  DisplayString (SIZE (0..255))
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "module Barcode pn"
+                ::= { system 59 }
+        slot10Ser  OBJECT-TYPE
+                SYNTAX INTEGER (0..16777215)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "module serial number"
+                ::= { system 60 }
+        slot10Fan  OBJECT-TYPE
+                SYNTAX INTEGER (0..16777215)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "module fanspeed"
+                ::= { system 61 }
+        slot10Temp  OBJECT-TYPE
+                SYNTAX INTEGER (0..16777215)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "module Temperature"
+                ::= { system 62 }
+        slot10St  OBJECT-TYPE
+                SYNTAX INTEGER (0..16777215)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "module Status bits"
+                ::= { system 63 }
+        slot10Out OBJECT-TYPE
+                SYNTAX INTEGER (0..16777215)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "module output level"
+                ::= { system 64 }
+				
+-------------------------------------------------------end of individual module 10
+
+				
+       slot11Name OBJECT-TYPE
+                SYNTAX  DisplayString (SIZE (0..255))
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "module Barcode pn"
+                ::= { system 65 }
+        slot11Ser  OBJECT-TYPE
+                SYNTAX INTEGER (0..16777215)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "module serial number"
+                ::= { system 66 }
+        slot11Fan  OBJECT-TYPE
+                SYNTAX INTEGER (0..16777215)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "module fanspeed"
+                ::= { system 67 }
+        slot11Temp  OBJECT-TYPE
+                SYNTAX INTEGER (0..16777215)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "module Temperature"
+                ::= { system 68 }
+        slot11St  OBJECT-TYPE
+                SYNTAX INTEGER (0..16777215)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "module Status bits"
+                ::= { system 69 }
+        slot11Out OBJECT-TYPE
+                SYNTAX INTEGER (0..16777215)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "module output level"
+                ::= { system 70 }
+				
+-------------------------------------------------------end of individual module 11
+
+    END

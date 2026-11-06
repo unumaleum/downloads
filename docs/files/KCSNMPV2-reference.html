@@ -1,0 +1,703 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Exeltech KC SNMP MIB reference</title>
+<style>
+:root {
+  --bg: #fbfbfa; --fg: #1d1f21; --muted: #5c6166; --accent: #0070c9; --rule: #d9dcdf;
+  --code-bg: #eef0f2; --th-bg: #eef2f6; --high: #a32020; --med: #8a5a00;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #16181b; --fg: #e3e5e8; --muted: #a1a7ad; --accent: #4db2ff; --rule: #33373c;
+    --code-bg: #24282d; --th-bg: #1f2429; --high: #f08080; --med: #e0b050;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #16181b; --fg: #e3e5e8; --muted: #a1a7ad; --accent: #4db2ff; --rule: #33373c;
+  --code-bg: #24282d; --th-bg: #1f2429; --high: #f08080; --med: #e0b050;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--fg);
+  font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+main { max-width: 920px; margin: 0 auto; padding: 32px 16px 64px; }
+a { color: var(--accent); }
+h1 { font-size: 1.7rem; line-height: 1.25; margin: 0 0 8px; }
+h2 { font-size: 1.3rem; margin: 40px 0 12px; padding-top: 12px; border-top: 1px solid var(--rule); }
+h3 { font-size: 1.1rem; margin: 28px 0 10px; }
+h3#high { color: var(--high); } h3#medium { color: var(--med); }
+p, li { max-width: 72ch; }
+ul, ol { padding-left: 1.4em; }
+li { margin: 4px 0; }
+li > ul, li > ol { margin: 4px 0; }
+code { font: 0.88em ui-monospace, "Cascadia Mono", Consolas, monospace; background: var(--code-bg);
+  padding: 1px 4px; border-radius: 4px; overflow-wrap: anywhere; }
+strong { font-weight: 650; }
+.table-wrap { overflow-x: auto; margin: 12px 0; }
+table { border-collapse: collapse; font-size: 0.92rem; min-width: 100%; }
+th, td { border: 1px solid var(--rule); padding: 6px 10px; text-align: left; vertical-align: top; }
+th { background: var(--th-bg); }
+.meta { color: var(--muted); font-size: 0.9rem; }
+</style>
+</head>
+<body>
+<main>
+<h1 id="exeltech-kc-snmp-mib-reference">Exeltech KC SNMP MIB reference</h1>
+<p><a href="https://unumaleum.github.io/downloads/#snmp-mib">Exeltech Software Downloads</a> · <a href="https://unumaleum.github.io/downloads/files/KCSNMPV2.mib">Download KCSNMPV2.mib</a></p>
+<p><code>KCSNMPV2.mib</code> describes what the monitor card of an Exeltech KC power system reports over SNMP, and the settings an SNMP manager can change. This page lists every object and trap in it, with its full OID, and what to watch for.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Module</strong></td>
+<td><code>EXELTECH-MIB</code></td>
+</tr>
+<tr>
+<td><strong>File</strong></td>
+<td><code>KCSNMPV2.mib</code> (dated 29 July 2024)</td>
+</tr>
+<tr>
+<td><strong>Enterprise</strong></td>
+<td><code>1.3.6.1.4.1.30320</code> (Exeltech)</td>
+</tr>
+<tr>
+<td><strong>Objects</strong></td>
+<td><code>1.3.6.1.4.1.30320.2.0</code>, below called <code>…</code></td>
+</tr>
+<tr>
+<td><strong>Format</strong></td>
+<td>SMIv1 objects (<code>OBJECT-TYPE</code>) and SNMPv1 traps (<code>TRAP-TYPE</code>)</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="using-the-mib">Using the MIB</h2>
+<ul>
+<li><strong>Load it</strong> into your SNMP manager or MIB browser. It imports <code>RFC1155-SMI</code>, <code>RFC-1212</code>, <code>RFC-1215</code> and <code>SNMPv2-TC</code>, which managers usually have already. Its comment says it was validated with Muonics' smicheck.</li>
+<li><strong>Every object is a scalar:</strong> read it with the instance <code>.0</code>, for example <code>1.3.6.1.4.1.30320.2.0.1.1.0</code> for the battery voltage.</li>
+<li><strong>Communities:</strong> StatusBoost reads with <code>public</code> and writes with <code>private</code>, over SNMP v2c on UDP port 161.</li>
+<li><strong>Traps</strong> go to the trap managers set in <code>trap-target-ip1</code> to <code>trap-target-ip3</code>.</li>
+<li><strong>Many settings are easier to change in StatusBoost:</strong> its Network Feature Setup sets the trap managers, the network settings, SNTP and the all-good trap. The alarm configuration is set with StatusBoost's System Configuration or the Alarm Configuration Tool.</li>
+</ul>
+<h2 id="objects">Objects</h2>
+<h3 id="battery-1">Battery: <code>….1</code></h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>OID</th>
+<th>Name</th>
+<th>Access</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>….1.1</code></td>
+<td><code>batDCV</code></td>
+<td>read-only</td>
+<td>Battery voltage, in tenths of a volt: divide by 10</td>
+</tr>
+<tr>
+<td><code>….1.2</code></td>
+<td><code>batDCI</code></td>
+<td>read-only</td>
+<td>Battery current, A</td>
+</tr>
+<tr>
+<td><code>….1.3</code></td>
+<td><code>batABUS</code></td>
+<td>read-only</td>
+<td>A bus DC voltage, V, if the system has one</td>
+</tr>
+<tr>
+<td><code>….1.4</code></td>
+<td><code>batBBUS</code></td>
+<td>read-only</td>
+<td>B bus DC voltage, V, if the system has one</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="phases-1-to-3-2-3-4">Phases 1 to 3: <code>….2</code>, <code>….3</code>, <code>….4</code></h3>
+<p>Each phase has the same eight objects: phase 1 under <code>….2</code>, phase 2 under <code>….3</code>, phase 3 under <code>….4</code>. In the names, <em>n</em> is the phase number.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>OID (phase 1)</th>
+<th>Name</th>
+<th>Access</th>
+<th>The MIB's description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>….2.1</code></td>
+<td><code>utilityAcvL</code><em>n</em></td>
+<td>read-only</td>
+<td>Inverter AC voltage, V. See <a href="#known-issues">known issue 1</a></td>
+</tr>
+<tr>
+<td><code>….2.2</code></td>
+<td><code>utilityAciL</code><em>n</em></td>
+<td>read-only</td>
+<td>Inverter current, A. See known issue 1</td>
+</tr>
+<tr>
+<td><code>….2.3</code></td>
+<td><code>utilityFrqL</code><em>n</em></td>
+<td>read-only</td>
+<td>Inverter frequency, Hz. See known issue 1</td>
+</tr>
+<tr>
+<td><code>….2.4</code></td>
+<td><code>inverterAcvL</code><em>n</em></td>
+<td>read-only</td>
+<td>Utility AC voltage, V. See known issue 1</td>
+</tr>
+<tr>
+<td><code>….2.5</code></td>
+<td><code>inverterAciL</code><em>n</em></td>
+<td>read-only</td>
+<td>Utility current, A. See known issue 1</td>
+</tr>
+<tr>
+<td><code>….2.6</code></td>
+<td><code>inverterFrqL</code><em>n</em></td>
+<td>read-only</td>
+<td>Utility frequency, Hz. See known issue 1</td>
+</tr>
+<tr>
+<td><code>….2.7</code></td>
+<td><code>line1AcvOut</code>, <code>line2ACVOut</code>, <code>line3ACVOut</code></td>
+<td>read-only</td>
+<td>Output voltage, V</td>
+</tr>
+<tr>
+<td><code>….2.8</code></td>
+<td><code>temperatureSTSL</code><em>n</em></td>
+<td>read-only</td>
+<td>SCR (transfer switch) temperature, °C</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="alarms-5">Alarms: <code>….5</code></h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>OID</th>
+<th>Name</th>
+<th>Access</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>….5.1</code></td>
+<td><code>systemAlarms</code></td>
+<td>read-only</td>
+<td>The conditions present now, one bit each: see <a href="#the-bits-of-systemalarms">the bits</a></td>
+</tr>
+<tr>
+<td><code>….5.2</code></td>
+<td><code>slotAlarms</code></td>
+<td>read-only</td>
+<td>Module slots not communicating: bit 0 (<code>0x001</code>) is slot 1, up to bit 10 (<code>0x400</code>), slot 11</td>
+</tr>
+<tr>
+<td><code>….5.3</code></td>
+<td><code>alarmOne</code></td>
+<td>read-only</td>
+<td>Alarm 1, the minor alarm: 1 when a condition configured for Alarm 1 is present, else 0</td>
+</tr>
+<tr>
+<td><code>….5.4</code></td>
+<td><code>alarmTwo</code></td>
+<td>read-only</td>
+<td>Alarm 2, the major alarm: 1 when a condition configured for Alarm 2 is present, else 0</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="the-bits-of-systemalarms">The bits of <code>systemAlarms</code></h4>
+<p>Bits 0 to 15 are the power system's conditions, and bits 16 to 31 the transfer switch's. The last column is the name StatusBoost and the Alarm Configuration Tool show for the same condition, where they show one.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Bit</th>
+<th>Mask</th>
+<th>The MIB's text</th>
+<th>In StatusBoost</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td><code>0x00000001</code></td>
+<td>Low DC Volt Alarm</td>
+<td>Module Low DCV Detected</td>
+</tr>
+<tr>
+<td>1</td>
+<td><code>0x00000002</code></td>
+<td>Power Module Fail</td>
+<td>Module Overload Detected (see known issue 3)</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>0x00000004</code></td>
+<td>NA</td>
+<td></td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>0x00000008</code></td>
+<td>PowerLvlIndicator</td>
+<td>Module Marginal Load Level Detected</td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>0x00000010</code></td>
+<td>Module Temperature Warning</td>
+<td>Module Temp Warning Detected</td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>0x00000020</code></td>
+<td>Module Local Disable</td>
+<td>Module Offline Detected (see known issue 3)</td>
+</tr>
+<tr>
+<td>6</td>
+<td><code>0x00000040</code></td>
+<td>cage comm failure detected</td>
+<td>Inverter System Cage Comm Degraded</td>
+</tr>
+<tr>
+<td>7</td>
+<td><code>0x00000080</code></td>
+<td>AB Bus Fail Detect</td>
+<td>Inverter System AB Bus Fault Detected</td>
+</tr>
+<tr>
+<td>8</td>
+<td><code>0x00000100</code></td>
+<td>System Disable</td>
+<td>Inverter System Offline Detected</td>
+</tr>
+<tr>
+<td>9</td>
+<td><code>0x00000200</code></td>
+<td>Power Module fail detected</td>
+<td>Module Fault Detected</td>
+</tr>
+<tr>
+<td>10</td>
+<td><code>0x00000400</code></td>
+<td>Slot Not Detected fault</td>
+<td>Module Not Detected</td>
+</tr>
+<tr>
+<td>11</td>
+<td><code>0x00000800</code></td>
+<td>Ph1 on Ref2</td>
+<td>Phase 1 on Reference 2</td>
+</tr>
+<tr>
+<td>12</td>
+<td><code>0x00001000</code></td>
+<td>Ph1 on Ref2 (see known issue 2)</td>
+<td>Phase 2 on Reference 2</td>
+</tr>
+<tr>
+<td>13</td>
+<td><code>0x00002000</code></td>
+<td>Ph1 on Ref2 (see known issue 2)</td>
+<td>Phase 3 on Reference 2</td>
+</tr>
+<tr>
+<td>14</td>
+<td><code>0x00004000</code></td>
+<td>NA</td>
+<td>Cage Not Detected (see known issue 3)</td>
+</tr>
+<tr>
+<td>15</td>
+<td><code>0x00008000</code></td>
+<td>NA</td>
+<td></td>
+</tr>
+<tr>
+<td>16</td>
+<td><code>0x00010000</code></td>
+<td>Utility Primary</td>
+<td>Utility Primary</td>
+</tr>
+<tr>
+<td>17</td>
+<td><code>0x00020000</code></td>
+<td>Inverter source fault</td>
+<td>Bad Inverter Source</td>
+</tr>
+<tr>
+<td>18</td>
+<td><code>0x00040000</code></td>
+<td>Utility source fault</td>
+<td>Bad Utility Source</td>
+</tr>
+<tr>
+<td>19</td>
+<td><code>0x00080000</code></td>
+<td>MBS Lockout Asserted</td>
+<td>MBS Lockout Asserted</td>
+</tr>
+<tr>
+<td>20</td>
+<td><code>0x00100000</code></td>
+<td>Sources not sync</td>
+<td>Sources Not Sync'd</td>
+</tr>
+<tr>
+<td>21</td>
+<td><code>0x00200000</code></td>
+<td>Fan fault detect STS PowerSwitch</td>
+<td>PowerSwitch Fan Fault Detected</td>
+</tr>
+<tr>
+<td>22</td>
+<td><code>0x00400000</code></td>
+<td>Warm Temp STS PowerSwitch</td>
+<td>PowerSwitch Warm Temp</td>
+</tr>
+<tr>
+<td>23</td>
+<td><code>0x00800000</code></td>
+<td>Overtemp STS PowerSwitch</td>
+<td>PowerSwitch Over Temp</td>
+</tr>
+<tr>
+<td>24</td>
+<td><code>0x01000000</code></td>
+<td>SCR Active (Legacy)</td>
+<td></td>
+</tr>
+<tr>
+<td>25</td>
+<td><code>0x02000000</code></td>
+<td>Utility SCR Driving</td>
+<td>PowerSwitch Utility Source Engaged</td>
+</tr>
+<tr>
+<td>26</td>
+<td><code>0x04000000</code></td>
+<td>STS Backfeed protection enabled</td>
+<td>STS Backfeed Protection Engaged</td>
+</tr>
+<tr>
+<td>27</td>
+<td><code>0x08000000</code></td>
+<td>Line 2 Line fail</td>
+<td>Line to Line Fault Detected</td>
+</tr>
+<tr>
+<td>28</td>
+<td><code>0x10000000</code></td>
+<td>STS Forced Inverter State</td>
+<td>Forced Inverter State Detected</td>
+</tr>
+<tr>
+<td>29</td>
+<td><code>0x20000000</code></td>
+<td>STS Forced Utility State</td>
+<td>Forced Utility State Detected</td>
+</tr>
+<tr>
+<td>30</td>
+<td><code>0x40000000</code></td>
+<td>STS Forced Contactor Open</td>
+<td>Forced Contactor Open</td>
+</tr>
+<tr>
+<td>31</td>
+<td><code>0x80000000</code></td>
+<td>STS Contactor Open Detected</td>
+<td>Contactor Open Detected</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="settings-6">Settings: <code>….6</code></h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>OID</th>
+<th>Name</th>
+<th>Access</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>….6.1</code></td>
+<td><code>dCVLow</code></td>
+<td>read-write</td>
+<td>Low battery voltage limit for <code>lowDCtrap</code>, in tenths of a volt: multiply the voltage by 10</td>
+</tr>
+<tr>
+<td><code>….6.2</code></td>
+<td><code>dCVHigh</code></td>
+<td>read-write</td>
+<td>High battery voltage limit for <code>highDCtrap</code>, in tenths of a volt</td>
+</tr>
+<tr>
+<td><code>….6.3</code></td>
+<td><code>alarm1Configuration</code></td>
+<td>read-only</td>
+<td>Which <code>systemAlarms</code> bits raise Alarm 1, as a mask of the same bits. The MIB says to change it with ProductStatus; today that is StatusBoost's System Configuration or the Alarm Configuration Tool</td>
+</tr>
+<tr>
+<td><code>….6.4</code></td>
+<td><code>alarm2Configuration</code></td>
+<td>read-only</td>
+<td>Which <code>systemAlarms</code> bits raise Alarm 2, the same way</td>
+</tr>
+<tr>
+<td><code>….6.5</code></td>
+<td><code>slotConfiguration</code></td>
+<td>read-only</td>
+<td>Which module slots are configured, one bit each as in <code>slotAlarms</code></td>
+</tr>
+<tr>
+<td><code>….6.6</code></td>
+<td><code>trap-target-ip1</code></td>
+<td>read-write</td>
+<td>IP address of the first trap manager. 0.0.0.0 stops all traps</td>
+</tr>
+<tr>
+<td><code>….6.7</code></td>
+<td><code>trap-target-ip2</code></td>
+<td>read-write</td>
+<td>IP address of the second trap manager; 0.0.0.0 removes it</td>
+</tr>
+<tr>
+<td><code>….6.8</code></td>
+<td><code>trap-target-ip3</code></td>
+<td>read-write</td>
+<td>IP address of the third trap manager; 0.0.0.0 removes it</td>
+</tr>
+<tr>
+<td><code>….6.9</code></td>
+<td><code>ipAddressStatic</code></td>
+<td>read-write</td>
+<td>The static IP address</td>
+</tr>
+<tr>
+<td><code>….6.10</code></td>
+<td><code>subnetMaskStatic</code></td>
+<td>read-write</td>
+<td>The static subnet mask</td>
+</tr>
+<tr>
+<td><code>….6.11</code></td>
+<td><code>defaultGatewayStatic</code></td>
+<td>read-write</td>
+<td>The static default gateway</td>
+</tr>
+<tr>
+<td><code>….6.12</code></td>
+<td><code>setNetworkConfig</code></td>
+<td>read-write</td>
+<td>Network options, one bit each: <code>0x01</code> DHCP or <code>0x02</code> static address, <code>0x04</code> SNMP, <code>0x08</code> SNTP, <code>0x10</code> web server. Writing it restarts the network card; clearing <code>0x04</code> turns off SNMP</td>
+</tr>
+<tr>
+<td><code>….6.13</code></td>
+<td><code>ntp-ip1</code></td>
+<td>read-write</td>
+<td>IP address of the SNTP server</td>
+</tr>
+<tr>
+<td><code>….6.14</code></td>
+<td><code>ntp-set</code></td>
+<td>read-write</td>
+<td>The time zone for SNTP. Set it with StatusBoost's Network Feature Setup</td>
+</tr>
+<tr>
+<td><code>….6.15</code></td>
+<td><code>traps-config</code></td>
+<td>read-write</td>
+<td>The all-good trap: one every 30 s × the value (0 to 255); 0 turns it off</td>
+</tr>
+<tr>
+<td><code>….6.16</code></td>
+<td><code>logging-config</code></td>
+<td>read-write</td>
+<td>Factory use only</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="system-and-modules-7">System and modules: <code>….7</code></h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>OID</th>
+<th>Name</th>
+<th>Access</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>….7.1</code></td>
+<td><code>systemName</code></td>
+<td>read-write</td>
+<td>The system's part number, from its barcode</td>
+</tr>
+<tr>
+<td><code>….7.2</code></td>
+<td><code>systemSerial</code></td>
+<td>read-write</td>
+<td>The system's serial number</td>
+</tr>
+<tr>
+<td><code>….7.3</code></td>
+<td><code>monitorName</code></td>
+<td>read-only</td>
+<td>The monitor card's part number, from its barcode</td>
+</tr>
+<tr>
+<td><code>….7.4</code></td>
+<td><code>monitorSer</code></td>
+<td>read-only</td>
+<td>The monitor card's serial number</td>
+</tr>
+<tr>
+<td><code>….7.5</code> to <code>….7.70</code></td>
+<td><code>slot1Name</code> … <code>slot11Out</code></td>
+<td>read-only</td>
+<td>Six objects for each module slot, 1 to 11 (below)</td>
+</tr>
+</tbody>
+</table></div>
+<p>The <code>systemName</code> and <code>systemSerial</code> are set at the factory.</p>
+<p>Slot <em>s</em> (1 to 11) starts at <code>….7.</code>(6<em>s</em> − 1): slot 1 at <code>….7.5</code>, slot 2 at <code>….7.11</code>, up to slot 11 at <code>….7.65</code>. From there:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>OID (slot 1)</th>
+<th>Name</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>….7.5</code></td>
+<td><code>slot</code><em>s</em><code>Name</code></td>
+<td>The module's part number, from its barcode</td>
+</tr>
+<tr>
+<td><code>….7.6</code></td>
+<td><code>slot</code><em>s</em><code>Ser</code></td>
+<td>The module's serial number</td>
+</tr>
+<tr>
+<td><code>….7.7</code></td>
+<td><code>slot</code><em>s</em><code>Fan</code></td>
+<td>The module's fan speed</td>
+</tr>
+<tr>
+<td><code>….7.8</code></td>
+<td><code>slot</code><em>s</em><code>Temp</code></td>
+<td>The module's temperature</td>
+</tr>
+<tr>
+<td><code>….7.9</code></td>
+<td><code>slot</code><em>s</em><code>St</code></td>
+<td>The module's status bits</td>
+</tr>
+<tr>
+<td><code>….7.10</code></td>
+<td><code>slot</code><em>s</em><code>Out</code></td>
+<td>The module's output level</td>
+</tr>
+</tbody>
+</table></div>
+<p>In the names, <em>s</em> is the slot number, for example <code>slot7Temp</code> at <code>….7.44</code>.</p>
+<h2 id="traps">Traps</h2>
+<p>The traps are SNMPv1 traps. A manager that receives them as SNMPv2 notifications sees the trap OID <em>enterprise</em><code>.0.</code><em>number</em> (RFC 3584), shown in the last column.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Trap</th>
+<th>Enterprise</th>
+<th>Number</th>
+<th>Variables</th>
+<th>When</th>
+<th>SNMPv2 trap OID</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>lowDCtrap</code></td>
+<td><code>batDCV</code> (<code>….1.1</code>)</td>
+<td>1</td>
+<td><code>batDCV</code>, <code>dCVLow</code></td>
+<td>The battery voltage fell below the low limit</td>
+<td><code>….1.1.0.1</code></td>
+</tr>
+<tr>
+<td><code>highDCtrap</code></td>
+<td><code>batDCV</code> (<code>….1.1</code>)</td>
+<td>2</td>
+<td><code>batDCV</code>, <code>dCVHigh</code></td>
+<td>The battery voltage rose above the high limit</td>
+<td><code>….1.1.0.2</code></td>
+</tr>
+<tr>
+<td><code>alarmConfig1trap</code></td>
+<td><code>alarms</code> (<code>….5</code>)</td>
+<td>3</td>
+<td><code>alarm1Configuration</code>, <code>systemAlarms</code></td>
+<td>Alarm 1, the minor alarm, was raised</td>
+<td><code>….5.0.3</code></td>
+</tr>
+<tr>
+<td><code>alarmConfig2trap</code></td>
+<td><code>alarms</code> (<code>….5</code>)</td>
+<td>4</td>
+<td><code>alarm2Configuration</code>, <code>systemAlarms</code></td>
+<td>Alarm 2, the major alarm, was raised</td>
+<td><code>….5.0.4</code></td>
+</tr>
+<tr>
+<td><code>generalAlarmtrap</code></td>
+<td><code>alarms</code> (<code>….5</code>)</td>
+<td>5</td>
+<td><code>alarmOne</code>, <code>alarmTwo</code></td>
+<td>A general status update</td>
+<td><code>….5.0.5</code></td>
+</tr>
+<tr>
+<td><code>slotAlarmtrap</code></td>
+<td><code>alarms</code> (<code>….5</code>)</td>
+<td>6</td>
+<td><code>slotAlarms</code></td>
+<td>A module slot status update (see known issue 4)</td>
+<td><code>….5.0.6</code></td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="known-issues">Known issues</h2>
+<ol>
+<li><strong>Utility or inverter: the phase objects' names and descriptions disagree.</strong> Objects 1 to 3 of each phase are named <code>utility…</code>, but described as inverter values; objects 4 to 6 are named <code>inverter…</code>, but described as utility values. Which is right is being checked. Until then, compare a reading with what StatusBoost shows before relying on it.</li>
+<li><strong>Bits 11, 12 and 13 of <code>systemAlarms</code></strong> all read "Ph1 on Ref2" in the MIB. They are phase 1, phase 2 and phase 3 on Reference 2.</li>
+<li><strong>Bits 1, 5 and 14 of <code>systemAlarms</code></strong> have different names in the MIB and in StatusBoost: "Power Module Fail" and Module Overload Detected; "Module Local Disable" and Module Offline Detected; "NA" and Cage Not Detected. The table above shows both.</li>
+<li><strong><code>slotAlarmtrap</code></strong> has the same description as <code>generalAlarmtrap</code>, "A general Status update". It carries <code>slotAlarms</code>, so it reports the module slots.</li>
+<li><strong>The bit masks are signed.</strong> <code>systemAlarms</code> and the configuration objects are <code>INTEGER</code>, a signed 32-bit number, so a manager shows a value with bit 31 (Contactor Open Detected) set as negative. Read them as unsigned 32-bit numbers.</li>
+</ol>
+<p>These are notes about the MIB's text. The MIB file is published as it is, so the object names and OIDs that managers already use stay the same.</p>
+<p class="meta">Generated from KCSNMPV2.md (the Markdown is the source).</p>
+</main>
+</body>
+</html>
