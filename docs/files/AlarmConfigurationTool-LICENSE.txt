@@ -1,0 +1,99 @@
+EXELTECH ALARM CONFIGURATION TOOL LICENSE AGREEMENT
+
+Copyright (c) 2026 Exeltech. All rights reserved.
+
+Read this agreement before downloading or using the Exeltech Alarm
+Configuration Tool (the "Tool"). By downloading, copying or using the
+Tool you accept this agreement. If you do not accept it, do not
+download or use the Tool.
+
+1. Exeltech customers only, free of charge
+
+The Tool is for Exeltech's customers: the owners and operators of
+Exeltech power systems, and those who install or service those
+systems for them. If you are one of them, Exeltech grants you a
+non-exclusive license, at no cost, to use the Tool on any number of
+your computers to configure the alarms of those Exeltech power
+systems: which conditions raise each system's Alarm 1 and Alarm 2,
+and on KC systems the module slots and cages the system has. If you
+are not an Exeltech customer, this agreement grants you no right to
+use the Tool.
+
+2. Copying and distribution
+
+You may copy the Tool for use by you and your organization. You may
+not sell, rent, lease or distribute it to anyone else, or charge for
+it. Others can download it from Exeltech.
+
+3. Restrictions
+
+You may not modify, reverse engineer, decompile or disassemble the
+Tool, except where applicable law expressly allows it despite this
+restriction. You may not remove or change its copyright notices or
+this agreement.
+
+4. Ownership
+
+The Tool is licensed, not sold. Exeltech keeps all rights in the Tool
+that this agreement does not expressly grant you.
+
+5. Privacy
+
+Exeltech does not collect any information through the Tool. The Tool
+sends nothing about you, your computer, your systems or how you use
+it to Exeltech or anyone else. It has no analytics, no telemetry, no
+update checks and no user accounts.
+
+The Tool communicates only with the Exeltech systems on your network.
+It searches the local network for them (UDP port 6006), and reads and
+configures their alarms (Modbus TCP port 502). What it reads stays on
+your computer, and it stores its files only on your computer:
+formats.ini, the device formats, and instance.ini, the devices you
+have connected to, in the folder that holds ConfigurationTool.exe. Its
+demo mode uses a temporary folder instead, and removes it when it
+closes.
+
+6. Changes to your systems
+
+The Tool changes the alarm configuration of the Exeltech systems it
+connects to. A wrong setting can keep a system from raising an alarm
+it should raise. You are responsible for the changes you make with
+it, and for checking afterwards that each system's alarms work as
+intended.
+
+7. No warranty
+
+The Tool is provided "as is", without warranty of any kind, express
+or implied, including the implied warranties of merchantability,
+fitness for a particular purpose and non-infringement. Exeltech does
+not warrant that the Tool is free of errors or that it will run
+without interruption. You use the Tool at your own risk.
+
+8. Limitation of liability
+
+To the extent permitted by law, Exeltech is not liable for any
+indirect, incidental, special or consequential damages, or for any
+loss of data, revenue or profit, arising from the use of the Tool or
+the inability to use it, even if Exeltech was told such damages were
+possible. In any case, Exeltech's total liability arising from the
+Tool is limited to the amount you paid for it.
+
+9. Termination
+
+This license ends automatically if you do not comply with it. When it
+ends, you must stop using the Tool and delete it.
+
+10. Third-party software
+
+The Tool includes the following software from others. Each part is
+licensed to you under its own license, not under this agreement, and
+nothing in this agreement limits your rights under those licenses.
+
+- The .NET 10 runtime and Windows Forms, by Microsoft and the .NET
+  Foundation, under the MIT License. https://dotnet.microsoft.com
+
+The MIT License's text is at https://opensource.org/license/mit.
+
+11. Contact
+
+Exeltech, https://www.exeltech.com
