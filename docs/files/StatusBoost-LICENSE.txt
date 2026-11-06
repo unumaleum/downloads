@@ -43,9 +43,11 @@ network. It searches the local network for them (UDP port 6006), reads
 and configures them (Modbus TCP port 502), and changes their network
 settings in Network Feature Setup (SNMP, UDP port 161). What it reads
 stays on your computer, and it stores its settings only on your
-computer, in "%APPDATA%\StatusBoost.NET". The links in its Help menu
-and About box open Exeltech's website in your browser, and only when
-you click them.
+computer, in "%APPDATA%\StatusBoost.NET". Help > User Guide copies
+the user guide, which is built into StatusBoost, to a temporary file
+and opens it in your PDF viewer. The links in its Help menu and About
+box open Exeltech's website in your browser, and only when you click
+them.
 
 6. Changes to your systems
 

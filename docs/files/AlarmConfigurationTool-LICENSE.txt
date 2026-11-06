@@ -51,7 +51,8 @@ your computer, and it stores its files only on your computer:
 formats.ini, the device formats, and instance.ini, the devices you
 have connected to, in the folder that holds ConfigurationTool.exe. Its
 demo mode uses a temporary folder instead, and removes it when it
-closes.
+closes. Its User Guide button copies the guide, which is built into
+the Tool, to a temporary file and opens it in your PDF viewer.
 
 6. Changes to your systems
 
