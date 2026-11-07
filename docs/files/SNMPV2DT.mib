@@ -1,0 +1,444 @@
+    EXELTECH-MIB DEFINITIONS ::= BEGIN
+IMPORTS
+        TRAP-TYPE
+                FROM RFC-1215
+
+        OBJECT-TYPE
+                FROM RFC-1212
+				
+        enterprises, IpAddress
+                FROM RFC1155-SMI;
+				
+
+  
+-- Author Raymond Sgroi
+
+        exeltechMIB    OBJECT IDENTIFIER ::= { enterprises 30320 }
+
+-- these are the objects
+
+        xferSw2         OBJECT IDENTIFIER ::= { exeltechMIB 1 }
+
+        objects         OBJECT IDENTIFIER ::= { xferSw2 1 }
+ 
+        battery         OBJECT IDENTIFIER ::= { objects 0 }
+		
+		phase1          OBJECT IDENTIFIER ::= { objects 1 }
+
+		phase2          OBJECT IDENTIFIER ::= { objects 2 }
+
+		phase3          OBJECT IDENTIFIER ::= { objects 3 }
+
+	    alarms          OBJECT IDENTIFIER ::= { objects 4 }
+
+		settings        OBJECT IDENTIFIER ::= { objects 5 }
+
+
+-- object defines
+--
+--   battery objects
+-- 
+        batDCV OBJECT-TYPE
+                SYNTAX INTEGER
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "The battery voltage. Displayed in deciVolts. Divide by 10 to get DC voltage."
+                ::= { battery 1 }
+
+        batDCI OBJECT-TYPE
+                SYNTAX INTEGER
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "The battery current. Displayed in amps."
+                ::= { battery 2 }
+
+        batABUS OBJECT-TYPE
+                SYNTAX INTEGER
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "The A bus DC voltage if present. Displayed in DC Volts."
+                ::= { battery 3 }
+
+        batBBUS OBJECT-TYPE
+                SYNTAX INTEGER
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "The B bus DC voltage if present. Displayed in DC Volts."
+                ::= { battery 4 }
+--
+--   phase 1 objects
+-- 
+         utilityACVPh1 OBJECT-TYPE
+                SYNTAX INTEGER (0..65535)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "The Inverter AC voltage of phase 1. Displayed in AC Volts."
+                ::= { phase1 1 }
+
+        utilityACIPh1 OBJECT-TYPE
+                SYNTAX INTEGER (0..65535)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "The Inverter current of phase 1. Displayed in amps."
+                ::= { phase1 2 }
+
+        utilityFrqPh1 OBJECT-TYPE
+                SYNTAX INTEGER (0..65535)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "The Inverter frequency of phase 1. Displayed in hertz."
+                ::= { phase1 3 }
+
+        inverterACVPh1 OBJECT-TYPE
+                SYNTAX INTEGER (0..65535)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "The Utility AC voltage of phase 1. Displayed in AC Volts."
+                ::= { phase1 4 }
+
+        inverterACIPh1 OBJECT-TYPE
+                SYNTAX INTEGER (0..65535)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "The Utility current of phase 1. Displayed in amps."
+                ::= { phase1 5 }
+
+        inverterFrqPh1 OBJECT-TYPE
+                SYNTAX INTEGER (0..65535)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "The Utility frequency of phase 1. Displayed in hertz."
+                ::= { phase1 6 }
+
+        phase1ACVOut OBJECT-TYPE
+                SYNTAX INTEGER (0..65535)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "The Output Voltage of phase 1. Displayed in AC volts"
+                ::= { phase1 7 }
+
+        temperatureSCR1 OBJECT-TYPE
+                SYNTAX INTEGER (0..65535)
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "The the SCR temperature of phase 1. Displayed in Degrees C."
+                ::= { phase1 8 }
+--
+--   phase 2 objects
+-- 
+        utilityACVPh2  OBJECT-TYPE
+                SYNTAX INTEGER
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "The Inverter AC voltage of phase 2. Displayed in AC Volts."
+                ::= { phase2 1 }
+
+         utilityACIPh2 OBJECT-TYPE
+                SYNTAX INTEGER
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "The Inverter current of phase 2. Displayed in amps."
+                ::= { phase2 2 }
+
+         utilityFrqPh2 OBJECT-TYPE
+                SYNTAX INTEGER
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "The Inverter frequency of phase 2. Displayed in hertz."
+                ::= { phase2 3 }
+
+        inverterACVPh2 OBJECT-TYPE
+                SYNTAX INTEGER
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "The Utility AC voltage of phase 2. Displayed in AC Volts."
+                ::= { phase2 4 }
+
+        inverterACIPh2 OBJECT-TYPE
+                SYNTAX INTEGER
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "The Utility current of phase 2. Displayed in amps."
+                ::= { phase2 5 }
+
+        inverterFrqPh2 OBJECT-TYPE
+                SYNTAX INTEGER
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "The Utility frequency of phase 2. Displayed in hertz."
+                ::= { phase2 6 }
+
+        phase2ACVOut OBJECT-TYPE
+                SYNTAX INTEGER
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "The Output Voltage of phase 2. Displayed in AC volts"
+                ::= { phase2 7 }
+
+        temperatureSCR2 OBJECT-TYPE
+                SYNTAX INTEGER
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "The the SCR temperature of phase 2. Displayed in Degrees C."
+                ::= { phase2 8 }
+
+--
+--   phase 3 objects
+--       
+
+         utilityACVPh3 OBJECT-TYPE
+                SYNTAX INTEGER
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "The Inverter AC voltage of phase 3. Displayed in AC Volts."
+                ::= { phase3 1 }
+
+         utilityACIPh3 OBJECT-TYPE
+                SYNTAX INTEGER
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "The Inverter current of phase 3. Displayed in amps."
+                ::= { phase3 2 }
+
+         utilityFrqPh3 OBJECT-TYPE
+                SYNTAX INTEGER
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "The Inverter frequency of phase 3. Displayed in hertz."
+                ::= { phase3 3 }
+
+        inverterACVPh3 OBJECT-TYPE
+                SYNTAX INTEGER
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "The Utility AC voltage of phase 3. Displayed in AC Volts."
+                ::= { phase3 4 }
+
+        inverterACIPh3 OBJECT-TYPE
+                SYNTAX INTEGER
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "The Utility current of phase 3. Displayed in amps."
+                ::= { phase3 5 }
+
+        inverterFrqPh3 OBJECT-TYPE
+                SYNTAX INTEGER
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "The Utility frequency of phase 3. Displayed in hertz."
+                ::= { phase3 6 }
+
+        phase3ACVOut OBJECT-TYPE
+                SYNTAX INTEGER
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "The Output Voltage of phase 3. Displayed in AC volts"
+                ::= { phase3 7 }
+
+        temperatureSCR3 OBJECT-TYPE
+                SYNTAX INTEGER
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "The the SCR temperature of phase 3. Displayed in Degrees C."
+                ::= { phase3 8 }
+--
+--   alarms objects
+--
+        phase1Alarms OBJECT-TYPE
+                SYNTAX INTEGER
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "Alarms Status: This is a 4 byte and each bit represents an alarm. 
+					
+					0x00000001 - Low DC Volt Alarm
+					0x00000002 - Power Module Fail
+					0x00000004 - On Ref#2
+					0x00000008 - n/a       
+					0x00000010 - Module Overtemp
+					0x00000020 - n/a
+					0x00000040 - n/a
+					0x00000080 - AB Bus Fail Detect
+					0x00000100 - n/a
+					0x00000200 - System not redunant
+					0x00000400 - Both sources are dead
+					0x00000800 - n/a
+					0x00001000 -
+					0x00002000 -
+					0x00004000 - 
+					0x00008000 - 
+					0x00010000 - Utility Primary
+					0x00020000 - Bad Inverter Source
+					0x00040000 - Bad Utility Source
+					0x00080000 - MBS Lockout Asserted
+					0x00100000 - Sources not sync
+					0x00200000 - Fan fail detect STS Transfer Switch
+                    0x00400000 - Warm Temp  STS Transfer Switch
+                    0x00800000 - Overtemp 	STS Transfer Switch					
+					0x01000000 - SCR Active  (Legacy)
+					0x02000000 - Utility SCR Drive  
+					0x04000000 - STS Backfeed protection enabled
+					0x08000000 - Line 2 Line fail
+					0x10000000 - STS Forced Inverter State
+					0x20000000 - STS Forced Utility State
+					0x40000000 - STS Forced Contactor Open
+					0x80000000 - STS Contactor Open Detected"
+					
+                ::= { alarms 1 }
+
+        phase2Alarms OBJECT-TYPE
+                SYNTAX INTEGER
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "Alarms Status: This is a 4 byte Status See Phase 1 Alarm description" 
+
+                ::= { alarms 2 }
+
+        phase3Alarms OBJECT-TYPE
+                SYNTAX INTEGER
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "Alarms Status: This is a 4 byte Status See Phase 1 Alarm description" 
+				
+                ::= { alarms 3 }
+
+        alarmOne OBJECT-TYPE
+                SYNTAX INTEGER
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "Alarms Status: 0 is no Alarm, 1 is any configured Alarm 1 on any phase."
+                ::= { alarms 4 }
+
+        alarmTwo OBJECT-TYPE
+                SYNTAX INTEGER
+                ACCESS read-only
+                STATUS mandatory
+                DESCRIPTION
+                        "Alarms Status: 0 is no Alarm, 1 is any configured Alarm 2 on any phase."
+                ::= { alarms 5 }     
+--
+--   settings objects
+--
+        dCVLow OBJECT-TYPE
+                SYNTAX INTEGER
+                ACCESS read-write
+                STATUS mandatory
+                DESCRIPTION
+                        "This value is the low DC Voltage limit for sending traps. The voltage 
+					 needs to be set in deciVolts. Multiply the voltage by 10 and then send
+					 that value."
+                ::= { settings 1 }
+
+        dCVHigh OBJECT-TYPE
+                SYNTAX INTEGER
+                ACCESS read-write
+                STATUS mandatory
+                DESCRIPTION
+                        "This value is the high DC Voltage limit for sending traps. The voltage 
+					 needs to be set in deciVolts. Multiply the voltage by 10 and then send
+					 that value."
+                ::= { settings 2 }
+
+        trap-target-ip1 OBJECT-TYPE
+                SYNTAX IpAddress
+                ACCESS read-write
+                STATUS mandatory
+                DESCRIPTION
+                        "Ip address of the first manager for traps. Set to zero to STOP TRAPS from sending"
+                ::= { settings 3 }
+
+        trap-target-ip2 OBJECT-TYPE
+                SYNTAX IpAddress
+                ACCESS read-write
+                STATUS mandatory
+                DESCRIPTION
+                        "Ip address of the second manager for traps.  Set to zero to remove target"
+                ::= { settings 4 }
+
+        ipAddressStatic OBJECT-TYPE
+                SYNTAX IpAddress
+                ACCESS read-write
+                STATUS mandatory
+                DESCRIPTION
+                        "The System IP Address"
+                ::= { settings 5 }
+
+        subnetMaskStatic OBJECT-TYPE
+                SYNTAX IpAddress
+                ACCESS read-write
+                STATUS mandatory
+                DESCRIPTION
+                        "The System IP subnet mask"
+                ::= { settings 6 }
+
+        defaultGatewayStatic OBJECT-TYPE
+                SYNTAX IpAddress
+                ACCESS read-write
+                STATUS mandatory
+                DESCRIPTION
+                        "The System IP Gateway Address"
+                ::= { settings 7 }
+
+
+--
+-- V1/V2 trap syntax
+--	
+
+	lowDCtrap  TRAP-TYPE
+				ENTERPRISE batDCV 
+				VARIABLES { batDCV, dCVLow }
+				DESCRIPTION "Battery voltage low limit has been triggered."
+	::=  1
+
+	highDCtrap		TRAP-TYPE
+				ENTERPRISE batDCV 
+				VARIABLES { batDCV, dCVHigh }
+				DESCRIPTION "Battery voltage high limit has been triggered."
+	::=  2 
+
+	 
+
+	alarmConfig1trap		TRAP-TYPE
+				ENTERPRISE alarms   				
+				VARIABLES { phase1Alarms, phase2Alarms, phase3Alarms}
+				DESCRIPTION "A minor alarm has been triggered."
+	::=  3 
+
+	alarmConfig2trap		TRAP-TYPE
+				ENTERPRISE alarms 			
+				VARIABLES { phase1Alarms, phase2Alarms, phase3Alarms}
+				DESCRIPTION "A major alarm has been triggered."
+	::=  4 
+
+    END

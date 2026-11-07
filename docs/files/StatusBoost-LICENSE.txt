@@ -39,18 +39,23 @@ StatusBoost that this agreement does not expressly grant you.
 Exeltech does not collect any information through StatusBoost.
 StatusBoost sends nothing about you, your computer, your systems or
 how you use it to Exeltech or anyone else. It has no analytics, no
-telemetry, no update checks and no user accounts.
+telemetry and no user accounts. Help > Check for Updates reads the
+current version from Exeltech's download page, only when you choose it
+or, if you turn that on, when StatusBoost starts. No information is
+sent to Exeltech; only a version check is made. If you choose to
+update, StatusBoost downloads the new installer from the download page
+and starts it.
 
 StatusBoost communicates only with the Exeltech systems on your
-network. It searches the local network for them (UDP port 6006), reads
-and configures them (Modbus TCP port 502), and changes their network
+network, and with Exeltech's download page for the update check. It
+searches the local network for them (UDP port 6006), reads and
+configures them (Modbus TCP port 502), and changes their network
 settings in Network Feature Setup (SNMP, UDP port 161). What it reads
 stays on your computer, and it stores its settings only on your
-computer, in "%APPDATA%\StatusBoost.NET". Help > User Guide copies
-the user guide, which is built into StatusBoost, to a temporary file
-and opens it in your PDF viewer. The links in its Help menu and About
-box open Exeltech's website in your browser, and only when you click
-them.
+computer, in "%APPDATA%\StatusBoost.NET". Help > User Guide copies the
+user guide, which is built into StatusBoost, to a temporary file and
+opens it in your PDF viewer. The links in its Help menu and About box
+open Exeltech's website in your browser, and only when you click them.
 
 6. Changes to your systems
 

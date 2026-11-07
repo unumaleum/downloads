@@ -1,22 +1,22 @@
 {
- "page": "https://unumaleum.github.io/downloads/",
+ "page": "https://downloads.exeltech.com/",
  "updated": "2026-11-06",
  "programs": {
   "statusboost": {
    "name": "StatusBoost .NET",
-   "version": "2.0.12",
-   "file": "StatusBoost.NET-2.0.12-x64.msi",
-   "url": "https://github.com/unumaleum/downloads/releases/download/statusboost-2.0.12/StatusBoost.NET-2.0.12-x64.msi",
-   "sha256": "3ef53b57f45c0780bcf084ff9f3b7659a7e96734eb2f54efd4038c54d15181f7",
-   "size": 46227456
+   "version": "2.0.14",
+   "file": "StatusBoost.NET-2.0.14-x64.msi",
+   "url": "https://github.com/unumaleum/downloads/releases/download/statusboost-2.0.14/StatusBoost.NET-2.0.14-x64.msi",
+   "sha256": "ab9e20a2963d8b27d0145de8ca0497280a9a270a643fbaa94e0d617512d2dfec",
+   "size": 46346240
   },
   "alarm-configuration-tool": {
    "name": "Alarm Configuration Tool",
-   "version": "2.0.6",
+   "version": "2.0.7",
    "file": "ConfigurationTool.exe",
-   "url": "https://github.com/unumaleum/downloads/releases/download/configurationtool-2.0.6/ConfigurationTool.exe",
-   "sha256": "83bc3963f363948e34bc3cf467aed52df560150b9976b44cfeb1930971f87993",
-   "size": 52068040
+   "url": "https://github.com/unumaleum/downloads/releases/download/configurationtool-2.0.7/ConfigurationTool.exe",
+   "sha256": "de4880b956904a1cf38d0f3cb57678cbe8ed17291b3f14c9afd4dee5824509a7",
+   "size": 52083000
   }
  }
 }

@@ -36,7 +36,7 @@
   .masthead nav { display: flex; gap: 1.4rem; }
   .masthead nav a { color: #212121; text-decoration: none; font-weight: 600; font-size: 0.95rem; }
   .masthead nav a:hover { color: #0070c9; text-decoration: underline; }
-  main { flex: 1; width: 100%; max-width: 38rem; margin: 0 auto; padding: 3rem 1rem 2.4rem; }
+  main { flex: 1; width: 100%; max-width: 46rem; margin: 0 auto; padding: 3rem 1rem 2.4rem; }
   .intro { text-align: center; }
   h1 { font-size: 2.3rem; line-height: 1.15; margin: 0 0 0.6rem; letter-spacing: -0.01em; }
   .lead { font-size: 1.15rem; color: var(--muted); margin: 0 auto; max-width: 28rem; }
@@ -52,6 +52,9 @@
   .self:hover, .self:focus-visible { color: var(--link); opacity: 1; }
   .summary { color: var(--muted); text-align: center; margin: 0 auto 1.4rem; max-width: 28rem; }
   .action { text-align: center; }
+  .pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-areas: "b1 b2" "f1 f2"; gap: 0 1.6rem; }
+  .pair .b1 { grid-area: b1; } .pair .b2 { grid-area: b2; scroll-margin-top: 1rem; } .pair .f1 { grid-area: f1; } .pair .f2 { grid-area: f2; }
+  .pair .download { display: flex; justify-content: center; align-items: center; white-space: normal; text-align: center; padding: 0.85rem 1rem; }
   .download {
     display: inline-flex; align-items: center; gap: 0.6rem;
     background: var(--brand); color: var(--on-brand); text-decoration: none; border: 2px solid var(--brand);
@@ -93,6 +96,8 @@
     h1 { font-size: 1.9rem; }
     .logo img { height: 40px; }
     .download { display: flex; justify-content: center; white-space: normal; padding: 0.85rem 1rem; }
+    .pair { grid-template-columns: minmax(0, 1fr); grid-template-areas: "b1" "f1" "b2" "f2"; }
+    .pair .f1 { margin-bottom: 1.2rem; }
   }
 </style>
 </head>
@@ -112,72 +117,60 @@
     <ul class="toc">
       <li><a href="#statusboost">StatusBoost .NET</a></li>
       <li><a href="#alarm-configuration-tool">Alarm Configuration Tool</a></li>
-      <li><a href="#user-guide">StatusBoost .NET User Guide</a></li>
-      <li><a href="#alarm-configuration-tool-guide">Alarm Configuration Tool User Guide</a></li>
+      <li><a href="#snmp-mib-nc-lc">SNMP MIB for NC and LC Inverters</a></li>
       <li><a href="#snmp-mib">SNMP MIB for KC Systems</a></li>
     </ul>
   </nav>
   <section class="item" id="statusboost">
     <h2>StatusBoost .NET<a class="self" href="#statusboost" aria-label="Link to StatusBoost .NET">#</a></h2>
     <p class="summary">See the status of your Exeltech power systems from your Windows PC.</p>
-    <div class="action">
-      <a class="download" href="https://github.com/unumaleum/downloads/releases/download/statusboost-2.0.12/StatusBoost.NET-2.0.12-x64.msi">
-        <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11"/><path d="m7 10.5 5 5 5-5"/><path d="M5 20h14"/></svg>
-        Download StatusBoost .NET
-      </a>
+    <div class="pair">
+      <a class="download b1" href="https://github.com/unumaleum/downloads/releases/download/statusboost-2.0.14/StatusBoost.NET-2.0.14-x64.msi"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11"/><path d="m7 10.5 5 5 5-5"/><path d="M5 20h14"/></svg> Download StatusBoost .NET</a>
+      <div class="f1">
+        <p class="facts">Version 2.0.14 &middot; Windows 10 and 11, 64-bit &middot; 44 MB &middot; Free for Exeltech customers &middot; <a href="files/StatusBoost-LICENSE.txt">License</a></p>
+      </div>
+      <a class="download secondary b2" id="user-guide" href="files/StatusBoost-User-Guide.pdf"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11"/><path d="m7 10.5 5 5 5-5"/><path d="M5 20h14"/></svg> Download StatusBoost .NET User Guide</a>
+      <div class="f2"><p class="facts">PDF &middot; 829 KB &middot; For StatusBoost .NET 2.0.14</p></div>
     </div>
-    <p class="facts">Version 2.0.12 &middot; Windows 10 and 11, 64-bit &middot; 44 MB &middot; Free for Exeltech customers &middot; <a href="files/StatusBoost-LICENSE.txt">License</a></p>
     <h3>Install it</h3>
     <ol>
-      <li>Open the file you downloaded, <b>StatusBoost.NET-2.0.12-x64.msi</b>.</li>
+      <li>Open the file you downloaded, <b>StatusBoost.NET-2.0.14-x64.msi</b>.</li>
       <li>Follow the installer. When Windows asks for permission, click <b>Yes</b>.</li>
       <li>Start StatusBoost .NET from the Start menu or the desktop.</li>
     </ol>
-    <p class="aside">The user guide is built into it: open Help, then User Guide.</p>
-    <p class="note">If Windows says <b>&ldquo;Windows protected your PC&rdquo;</b>, click <b>More info</b>, then <b>Run anyway</b>. This version is not digitally signed yet.</p>
-    <p class="check">To check the download, the SHA-256 of StatusBoost.NET-2.0.12-x64.msi is<br><span class="hash">3ef53b57f45c0780bcf084ff9f3b7659a7e96734eb2f54efd4038c54d15181f7</span></p>
+    <p class="aside">The user guide is built into it: open Help, then User Guide. From this version on, Help, then Check for Updates, can update StatusBoost.</p>
+    <p class="check">To check the download, the SHA-256 of StatusBoost.NET-2.0.14-x64.msi is<br><span class="hash">ab9e20a2963d8b27d0145de8ca0497280a9a270a643fbaa94e0d617512d2dfec</span></p>
   </section>
   <section class="item" id="alarm-configuration-tool">
     <h2>Alarm Configuration Tool<a class="self" href="#alarm-configuration-tool" aria-label="Link to Alarm Configuration Tool">#</a></h2>
     <p class="summary">Choose which conditions raise your Exeltech unit&#x27;s alarms, and which module slots and cages it has.</p>
-    <div class="action">
-      <a class="download" href="https://github.com/unumaleum/downloads/releases/download/configurationtool-2.0.6/ConfigurationTool.exe">
-        <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11"/><path d="m7 10.5 5 5 5-5"/><path d="M5 20h14"/></svg>
-        Download Alarm Configuration Tool
-      </a>
+    <div class="pair">
+      <a class="download b1" href="https://github.com/unumaleum/downloads/releases/download/configurationtool-2.0.7/ConfigurationTool.exe"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11"/><path d="m7 10.5 5 5 5-5"/><path d="M5 20h14"/></svg> Download Alarm Configuration Tool</a>
+      <div class="f1">
+        <p class="facts">Version 2.0.7 &middot; Windows 10 and 11, 64-bit &middot; 50 MB &middot; Free for Exeltech customers &middot; <a href="files/AlarmConfigurationTool-LICENSE.txt">License</a></p>
+        <p class="facts">By downloading it, you accept its <a href="files/AlarmConfigurationTool-LICENSE.txt">license</a>.</p>
+      </div>
+      <a class="download secondary b2" id="alarm-configuration-tool-guide" href="files/AlarmConfigurationTool-User-Guide.pdf"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11"/><path d="m7 10.5 5 5 5-5"/><path d="M5 20h14"/></svg> Download Alarm Configuration Tool User Guide</a>
+      <div class="f2"><p class="facts">PDF &middot; 467 KB &middot; For the Alarm Configuration Tool 2.0.7</p></div>
     </div>
-    <p class="facts">Version 2.0.6 &middot; Windows 10 and 11, 64-bit &middot; 50 MB &middot; Free for Exeltech customers &middot; <a href="files/AlarmConfigurationTool-LICENSE.txt">License</a></p>
-    <p class="facts">By downloading it, you accept its <a href="files/AlarmConfigurationTool-LICENSE.txt">license</a>.</p>
     <h3>Run it</h3>
     <ol>
       <li>Put <b>ConfigurationTool.exe</b> in a folder of its own, for example in your Documents.</li>
       <li>Open it. It needs no installation and no administrator rights.</li>
     </ol>
     <p class="aside">Close StatusBoost while you use the tool: both use the same network port to find units. Its User Guide button opens the guide built into it.</p>
-    <p class="note">If Windows says <b>&ldquo;Windows protected your PC&rdquo;</b>, click <b>More info</b>, then <b>Run anyway</b>. This version is not digitally signed yet.</p>
-    <p class="check">To check the download, the SHA-256 of ConfigurationTool.exe is<br><span class="hash">83bc3963f363948e34bc3cf467aed52df560150b9976b44cfeb1930971f87993</span></p>
+    <p class="check">To check the download, the SHA-256 of ConfigurationTool.exe is<br><span class="hash">de4880b956904a1cf38d0f3cb57678cbe8ed17291b3f14c9afd4dee5824509a7</span></p>
   </section>
-  <section class="item" id="user-guide">
-    <h2>StatusBoost .NET User Guide<a class="self" href="#user-guide" aria-label="Link to StatusBoost .NET User Guide">#</a></h2>
-    <p class="summary">How to install and use StatusBoost .NET.</p>
+  <section class="item" id="snmp-mib-nc-lc">
+    <h2>SNMP MIB for NC and LC Inverters<a class="self" href="#snmp-mib-nc-lc" aria-label="Link to SNMP MIB for NC and LC Inverters">#</a></h2>
+    <p class="summary">For NC and LC inverters with the 880-00135-001 communication board: load it into your SNMP manager to read the inverter&#x27;s values and receive its traps.</p>
     <div class="action">
-      <a class="download secondary" href="files/StatusBoost-User-Guide.pdf">
+      <a class="download secondary" href="files/SNMPV2DT.mib">
         <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11"/><path d="m7 10.5 5 5 5-5"/><path d="M5 20h14"/></svg>
-        Download StatusBoost .NET User Guide
+        Download SNMP MIB for NC and LC Inverters
       </a>
     </div>
-    <p class="facts">PDF &middot; 737 KB &middot; For StatusBoost .NET 2.0.12</p>
-  </section>
-  <section class="item" id="alarm-configuration-tool-guide">
-    <h2>Alarm Configuration Tool User Guide<a class="self" href="#alarm-configuration-tool-guide" aria-label="Link to Alarm Configuration Tool User Guide">#</a></h2>
-    <p class="summary">How to get and use the Alarm Configuration Tool, with each device&#x27;s alarm conditions.</p>
-    <div class="action">
-      <a class="download secondary" href="files/AlarmConfigurationTool-User-Guide.pdf">
-        <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11"/><path d="m7 10.5 5 5 5-5"/><path d="M5 20h14"/></svg>
-        Download Alarm Configuration Tool User Guide
-      </a>
-    </div>
-    <p class="facts">PDF &middot; 467 KB &middot; For the Alarm Configuration Tool 2.0.6</p>
+    <p class="facts">MIB &middot; 14 KB &middot; EXELTECH-MIB, for the 880-00135-001 communication board</p>
   </section>
   <section class="item" id="snmp-mib">
     <h2>SNMP MIB for KC Systems<a class="self" href="#snmp-mib" aria-label="Link to SNMP MIB for KC Systems">#</a></h2>
