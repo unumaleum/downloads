@@ -41,18 +41,24 @@ that this agreement does not expressly grant you.
 
 Exeltech does not collect any information through the Tool. The Tool
 sends nothing about you, your computer, your systems or how you use
-it to Exeltech or anyone else. It has no analytics, no telemetry, no
-update checks and no user accounts.
+it to Exeltech or anyone else. It has no analytics, no telemetry and
+no user accounts. Its Check for Updates button reads the current
+version from Exeltech's download page, only when you choose it or, if
+you turn that on, when the Tool starts. No information is sent to
+Exeltech; only a version check is made. If you choose to update, the
+Tool downloads its new version from the download page and replaces
+itself.
 
-The Tool communicates only with the Exeltech systems on your network.
-It searches the local network for them (UDP port 6006), and reads and
-configures their alarms (Modbus TCP port 502). What it reads stays on
-your computer, and it stores its files only on your computer:
-formats.ini, the device formats, and instance.ini, the devices you
-have connected to, in the folder that holds ConfigurationTool.exe. Its
-demo mode uses a temporary folder instead, and removes it when it
-closes. Its User Guide button copies the guide, which is built into
-the Tool, to a temporary file and opens it in your PDF viewer.
+The Tool communicates only with the Exeltech systems on your network,
+and with Exeltech's download page for the update check. It searches
+the local network for them (UDP port 6006), and reads and configures
+their alarms (Modbus TCP port 502). What it reads stays on your
+computer, and it stores its files only on your computer: formats.ini,
+the device formats, and instance.ini, the devices you have connected
+to, in the folder that holds ConfigurationTool.exe. Its demo mode uses
+a temporary folder instead, and removes it when it closes. Its User
+Guide button copies the guide, which is built into the Tool, to a
+temporary file and opens it in your PDF viewer.
 
 6. Changes to your systems
 
