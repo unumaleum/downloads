@@ -1,0 +1,79 @@
+STATUSBOOST LICENSE AGREEMENT (iPhone and iPad)
+
+Copyright (c) 2026 Exeltech. All rights reserved.
+
+By downloading or using StatusBoost you accept this agreement. If you do
+not accept it, do not download or use StatusBoost.
+
+1. Exeltech customers only, free of charge
+
+StatusBoost is for Exeltech's customers: the owners and operators of
+Exeltech power systems, and those who install or service those systems
+for them. If you are one of them, Exeltech grants you a non-exclusive
+license, at no cost, to use StatusBoost on any iPhone or iPad you own or
+control to monitor those Exeltech power systems. If you are not an
+Exeltech customer, this agreement grants you no right to use StatusBoost.
+
+2. Distribution
+
+StatusBoost is distributed only through Apple's App Store. You may not
+sell, rent, lease or distribute it, or charge for it.
+
+3. Restrictions
+
+You may not modify, reverse engineer, decompile or disassemble
+StatusBoost, except where applicable law expressly allows it despite
+this restriction.
+
+4. Ownership
+
+StatusBoost is licensed, not sold. Exeltech keeps all rights in
+StatusBoost that this agreement does not expressly grant you.
+
+5. Privacy
+
+Exeltech does not collect any information through StatusBoost.
+StatusBoost sends nothing about you, your device, your systems or how
+you use it to Exeltech or anyone else. It has no analytics, no telemetry
+and no user accounts.
+
+StatusBoost communicates only with the Exeltech systems on your local
+network. When you open Find Systems it searches the local network for
+them (UDP port 6006), and it reads them (Modbus TCP port 502). It only
+reads: it never changes a system's configuration or settings. What it
+reads and the systems you add stay on your device.
+
+6. No warranty
+
+StatusBoost is provided "as is", without warranty of any kind, express
+or implied, including the implied warranties of merchantability, fitness
+for a particular purpose and non-infringement. Exeltech does not warrant
+that StatusBoost is free of errors, that it will run without
+interruption, or that the readings it shows are complete or current.
+Do not rely on StatusBoost alone for the safety of people or equipment.
+
+7. Limitation of liability
+
+To the extent permitted by law, Exeltech is not liable for any indirect,
+incidental, special or consequential damages, or for any loss of data,
+revenue or profit, arising from the use of StatusBoost or the inability
+to use it, even if Exeltech was told such damages were possible. In no
+event is Exeltech liable for any claim, damages or other liability
+arising from the use of StatusBoost.
+
+8. Termination
+
+This license ends automatically if you do not comply with it. When it
+ends, you must stop using StatusBoost and delete it.
+
+9. Apple
+
+This agreement is between you and Exeltech only, not Apple. Apple is not
+responsible for StatusBoost or its content, has no obligation to provide
+maintenance or support for it, and is not responsible for any claims
+relating to it. Apple and its subsidiaries are third-party beneficiaries
+of this agreement and may enforce it against you.
+
+10. Contact
+
+Exeltech, https://www.exeltech.com
