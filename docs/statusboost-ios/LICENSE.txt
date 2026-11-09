@@ -2,7 +2,7 @@ STATUSBOOST LICENSE AGREEMENT (iPhone and iPad)
 
 Copyright (c) 2026 Exeltech. All rights reserved.
 
-This agreement is between you and Ray Sgroi (the "Developer"), who
+This agreement is between you and Raymond Sgroi (the "Developer"), who
 publishes StatusBoost on the App Store for Exeltech, Inc. ("Exeltech"),
 the owner of StatusBoost.
 
@@ -122,7 +122,7 @@ agreement and may enforce it against you.
 
 Send any questions, complaints or claims about StatusBoost to:
 
-Ray Sgroi, for Exeltech, Inc.
+Raymond Sgroi, for Exeltech, Inc.
 7317 Jack Newell Blvd N
 Fort Worth, TX 76118
 Phone: 817-595-4969
